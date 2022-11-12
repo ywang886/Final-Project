@@ -28,7 +28,7 @@
 
 ### Since the file downloaded from the CDC data portal is a STAR-count file, I will need to convert it to a HTseq-count file to facilitate the subsequent use of DEseq to run the data.
 
-## (C) Input data to the vignette
+## (C) Inputing data to the vignette
 
 ### I will input the HTseq-count file and contruct the *DESeqDataSet*.
 
