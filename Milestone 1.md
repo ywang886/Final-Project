@@ -1,20 +1,6 @@
-# TRGN510 Final Project
-
-# Title
-
-## Differential Gene Expression in Breast Invasive Ductal Carcinoma by Age Using DeSEQ2.
-
-
-# Author
-
-## Yu Hsuan (Annie) Wang
-
-
-## Milestone 1
+# Milestone 1
 
 ## (A) Screening files
-
-### I will obtain my data from [CDC Data Protal](https://portal.gdc.cancer.gov/repository) by setting several filters, such as cancer primary diagnosis, gender, race, data category, workflow type, etc.
 
 First, I went to "Exploration" page and set the filters in "Cases" and "Clinical" sections as below.
 
@@ -32,6 +18,8 @@ First, I went to "Exploration" page and set the filters in "Cases" and "Clinical
 
 7. Primary Diagnosis: infiltrating duct carcinoma, nos
 
+8. Age at Diagnosis: (1) 26y-50y (2) 51y-90y 
+
 ![](https://github.com/ywang886/Pictures/blob/main/Filter%202.png?raw=true)
 
 After setting these filters in Exploration, I then clicked the bottom "View Files in Repository" to set the data type I would need to use.
@@ -46,37 +34,46 @@ After setting these filters in Exploration, I then clicked the bottom "View File
 
 ![](https://github.com/ywang886/Pictures/blob/main/Filter%201.png?raw=true)
 
-The total files I have gotten is 385. I would download and arrange the JSON file for data analysis later.
+The total files I have gotten are (1) 110 files / 98 cases, and (2) 232 files / 213 cases. I would download and arrange the files for data analysis later.
 
 ## (B) Organizing counts files
 
-### Since the file downloaded from the CDC data portal is a STAR-count file, I will need to convert it to a HTseq-count file to facilitate the subsequent use of DEseq to run the data.
+### Installation of GDC Data Transfer Tool
+
+Since the genome data stored at GDC Data Portal might be large sizes to arrange, a high-performance data download tool is useful in this case. I would use GDC Data Transfer Tool Client to execute data downloads and submissions.
+
+1. First, go to [GDC Data Transfer Tool](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool) download and install the GDC-client tool in MAC OSX x64 version.
+
+2.  Type the command in the terminal `export PATH="directory path:$PATH"`
+
+3. Check if the tool is installed succefully by typing `gdc-client -version` 
+
+### Download the Counts files
+
+1. The Manifest files were downloaded from GDC Data Protal. I created two directories, BC_younger and BC_older to save each manifest file.
+
+2. By using GDC-client tool, I need to download the Manifest file through typing `gdc-client download -m gdc_manifest.2022-11-15.txt` in the terminal.
+
+3. Then I organized the downloaded data into two directories, gdc_younger_data and gdc_older_data.
+
+### Organize the Counts files
+
+The total counts files I downloaded are 342. Each folder contains a .tsv count file and a logs folder. Since the .tsv file is needed only, I use R studio to collect all the count files.
+
+Here, I will take 3 files from each group 26y-50y and group 51y-90y to test running the vignette.
+
+I will select cases in groups 20y-30y and 80y-90y to observe the differential gene expression under the extreme situation.
 
 ## (C) Inputting data to the vignette
 
-### I will input the HTseq-count file and contruct the *DESeqDataSet*.
+### Install DEseq2 from Bioconductor
 
-# Milestone 2
+Install the package in [Bioconductor](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
 
-## (A) Differential expression analysis
+### Input the data
 
-### I will generate results table by using data frames for operating differential expression results.
+I confronted error when typing `dds <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
+                                       directory = directory,
+                                       design= ~ condition)`. The error is supposed to be the different type of count files. The STAR count files may not be analyzed here since the command is for HTseq count files.
 
-## (B) Exploring and exporting results
-
-### MA-plot
-
-### Plot counts
-
-### More information on results columns
-
-### Exporting results to CSV files
-
-## (C) Data transformations and visualization
-
-### I will build discrete distributions by using the raw counts to test for differential expression.
-
-
-# Deliverable
-
-### R MarkDown
+![](https://github.com/ywang886/Pictures/blob/main/R%20TEST.png?raw=true)
