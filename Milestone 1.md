@@ -58,11 +58,11 @@ Since the genome data stored at GDC Data Portal might be large sizes to arrange,
 
 ### Organize the Counts files
 
-The total counts files I downloaded are 342. Each folder contains a .tsv count file and a logs folder. Since the .tsv file is needed only, I use R studio to collect all the count files.
+The total counts files I downloaded are 342. Each folder contains a .tsv count file and a logs folder. Since the .tsv file is needed only, I will use R studio to collect all the count files.
 
-Here, I will take 3 files from each group 26y-50y and group 51y-90y to test running the vignette.
+Here, I will take 3 files from each group 26y-50y and 51y-90y to test running the vignette.
 
-I will select cases in groups 20y-30y and 80y-90y to observe the differential gene expression under the extreme situation.
+I will choose two groups of cases, 20-30 years old and 80-90 years old, to observe the differences in gene expression at the extremes.
 
 ## (C) Inputting data to the vignette
 
@@ -72,8 +72,8 @@ Install the package in [Bioconductor](https://bioconductor.org/packages/release/
 
 ### Input the data
 
-I confronted error when typing `dds <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
+I confronted an error when typing `dds <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
                                        directory = directory,
-                                       design= ~ condition)`. The error is supposed to be the different type of count files. The STAR count files may not be analyzed here since the command is for HTseq count files.
+                                       design= ~ condition)`. The error is supposed to be the different types of count files. The STAR count files may not be analyzed here since the command is for HTseq count files. I will solve this problem later.
 
 ![](https://github.com/ywang886/Pictures/blob/main/R%20TEST.png?raw=true)
