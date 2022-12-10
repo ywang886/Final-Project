@@ -111,7 +111,20 @@ plotMA(resAsh, xlim=xlim, ylim=ylim, main="ashr")
 
 ## (B) Plot counts
 
+The most and least differentially expressed genes can be obtained from the following codes.
+
+```
+plotCounts(dds, gene=which.min(res$padj), intgroup="condition")
+plotCounts(dds, gene=which.max(res$padj), intgroup="condition")
+```
+
+![](https://github.com/ywang886/Plots/blob/main/plot_counts_min_max.png?raw=true)
+
+The least differentially expressed gene is ENSG00000109321 while the most differentially expressed gene is ENSG00000109321.
+
 Since I filter the gene of TCGA-BRCA at first, making plot counts helps me to examine the counts of the single genes', BRCA1 and BRCA2, reads.
+
+The plots show no significant differences in gene expression between two age groups.
 
 ```
 d <- plotCounts(dds, "ENSG00000012048.23", intgroup="condition", 
@@ -172,7 +185,7 @@ There are two functions, `vst` and `rlog`, that eliminate the variance of the lo
 
 ## (B) Effects of transformations on the variance
 
-By typing the code to make the plot of standard deviation of the transformed data.
+By typing the code, I can make the plot of standard deviation of the transformed data. As can be seen from the plot, the variance has been eliminated where the mean is low, making the dataset more concentrated.
 
 ```
 ntd <- normTransform(dds)
@@ -187,6 +200,8 @@ meanSdPlot(assay(ntd))
 ![](https://github.com/ywang886/Pictures/blob/main/transformed_plot_vsd.png?raw=true)
 
 # Heat Map
+
+The heat map helps to compare the X-axis and Y-axis. As shown, the blue region in the middle has different gene expression in the two age groups. This gene name can be found in the "ntd" table and can be known to have lower expression in younger patients.
 
 ```
 library("pheatmap")
@@ -207,6 +222,8 @@ pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=FALSE,
 ![](https://github.com/ywang886/Pictures/blob/main/heatmap_vsd.png?raw=true)
 
 # Heatmap of the sample-to-sample distances
+
+This heat map plot illustrates the correlation of gene expression between the two groups, which shows some differences in gene expression between younger and older patients.
 
 ```
 sampleDists <- dist(t(assay(vsd)))

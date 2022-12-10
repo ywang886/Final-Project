@@ -135,7 +135,7 @@ There are 60660 rows in cts. Now I have to do is to remove the empty gene expres
 
 `cts <- counts[which(rowSums(counts) > 0),]`
 
-After removing the empty rows, the total row is 53906
+After removing the empty rows, the total row is 53906.
 
 Then inputing the annotation file to set the condition for each case.
 
